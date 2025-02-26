@@ -3,22 +3,22 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './components/header/Header'
-import Newcard from './components/newcard/Newcard'
-import BrowseCards from './components/browse/BrowseCards'
-import MainContainer from './components/main_container/MainConteiner'
-import Profile from './components/profile/Profile'
+import PopNewCard from './components/newcard/PopNewCard'
+import PopBrowse from './components/browse/PopBrowse'
+import Main from './components/main_container/Main'
+import PopUser from './components/profile/PopUser'
 
 function App() {
     return (
         <div className="wrapper">
-            <Profile />
+            <PopUser />
 
-            <Newcard />
+            <PopNewCard />
 
-            <BrowseCards />
+            <PopBrowse />
 
             <Header />
-            <MainContainer />
+            <Main />
         </div>
     )
 }
