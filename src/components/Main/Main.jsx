@@ -1,4 +1,4 @@
-import Card from '../Card/Card'
+import Card from '../Card/Card.jsx'
 import Column from '../Column/Column'
 export default function Main() {
     return (
