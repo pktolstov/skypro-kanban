@@ -1,23 +1,22 @@
-import { cardList } from "../../../data"
-export default function Card({id}) {
-    
-    let card = cardList[id]
-    let color = (cardTheme) => {
-        
-        if (cardTheme === 'Web Design') {
-            return '_orange'
-        } else if (cardTheme === 'Research') {
-            return '_green'
+// D
+let color = (cardTheme) => {
+    if (cardTheme === 'Web Design') {
+        return '_orange'
+    } else if (cardTheme === 'Research') {
+        return '_green'
     } else if (cardTheme === 'Copywriting') {
         return '_purple'
     }
 }
+
+export function Card({ theme, date, title }) {
+
     return (
         <div className="cards__item">
             <div className="cards__card card">
                 <div className="card__group">
-                    <div className={`card__theme ${color(card.theme)}`}>
-                        <p className={color(card.theme)}>{card.theme}</p>
+                    <div className={`card__theme ${color(theme)}`}>
+                        <p className={color(theme)}>{theme}</p>
                     </div>
                     <a href="#popBrowse" target="_self">
                         <div className="card__btn">
@@ -29,7 +28,7 @@ export default function Card({id}) {
                 </div>
                 <div className="card__content">
                     <a href="" target="_blank">
-                        <h3 className="card__title">{card.title}</h3>
+                        <h3 className="card__title">{title}</h3>
                     </a>
                     <div className="card__date">
                         <svg
@@ -60,7 +59,7 @@ export default function Card({id}) {
                                 </clipPath>
                             </defs>
                         </svg>
-                        <p>{card.date}</p>
+                        <p>{date}</p>
                     </div>
                 </div>
             </div>
