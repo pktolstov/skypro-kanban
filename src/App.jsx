@@ -16,7 +16,7 @@ function App() {
         // <LoadExpect />
         setTimeout(() => {
             setLoading(false)
-        }, 2000)
+        }, 1000)
     }, [loading])
 
     return (

@@ -1,5 +1,13 @@
+import { SHeader } from "./Header.styled"
+import { useState } from "react"
+
 export default function Header() {
+    const [isVisible, setIsVisible] = useState(false)
+    const getVisibility = () => {
+        setIsVisible(!isVisible);
+      }
     return (
+        <SHeader>
         <header className="header">
             <div className="container">
                 <div className="header__block">
@@ -20,13 +28,13 @@ export default function Header() {
                         >
                             <a href="#popNewCard">Создать новую задачу</a>
                         </button>
-                        <a
+                        <a onClick={getVisibility}
                             href="#user-set-target"
                             className="header__user _hover02"
                         >
                             Ivan Ivanov
-                        </a>
-                        <div
+                        </a >
+                        <div style={{ display: isVisible ? 'block' : 'none' }}
                             className="header__pop-user-set pop-user-set"
                             id="user-set-target"
                         >
@@ -51,5 +59,6 @@ export default function Header() {
                 </div>
             </div>
         </header>
+        </SHeader>
     )
 }

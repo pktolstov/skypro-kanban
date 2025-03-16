@@ -1,4 +1,5 @@
-// D
+import { SCard } from "./Card.styled"
+import { colors } from "./Card.styled"
 let color = (cardTheme) => {
     if (cardTheme === 'Web Design') {
         return '_orange'
@@ -9,13 +10,16 @@ let color = (cardTheme) => {
     }
 }
 
+
+
 export function Card({ theme, date, title }) {
 
     return (
+        <SCard>
         <div className="cards__item">
             <div className="cards__card card">
                 <div className="card__group">
-                    <div className={`card__theme ${color(theme)}`}>
+                    <div className={`card__theme`} style={{ backgroundColor: colors[theme]}}>
                         <p className={color(theme)}>{theme}</p>
                     </div>
                     <a href="#popBrowse" target="_self">
@@ -64,5 +68,6 @@ export function Card({ theme, date, title }) {
                 </div>
             </div>
         </div>
+        </SCard>
     )
 }

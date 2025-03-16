@@ -1,5 +1,6 @@
 import Column from '../Column/Column'
 import { cardList } from '../../data'
+import { SMain } from './Main.styled'
 const columnList = [
     'Без статуса',
     'Нужно сделать',
@@ -9,7 +10,7 @@ const columnList = [
 ]
 export default function Main() {
     return (
-        <main className="main">
+        <SMain className="main">
             <div className="container">
                 <div className="main__block">
                     <div className="main__content">
@@ -27,6 +28,6 @@ export default function Main() {
                     </div>
                 </div>
             </div>
-        </main>
+        </SMain>
     )
 }
