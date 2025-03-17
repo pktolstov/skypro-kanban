@@ -8,6 +8,7 @@ import PopBrowse from './components/PopBrowse/PopBrowse'
 import Main from './components/Main/Main'
 import { LoadExpect } from './components/Adition/Adition'
 import PopUser from './components/PopUser/PopUser'
+import { GlobalStyles } from './GlobalStyles.styled'
 
 function App() {
     const [loading, setLoading] = useState(true)
@@ -20,16 +21,19 @@ function App() {
     }, [loading])
 
     return (
-        <div className="wrapper">
-            <PopUser />
+        <>
+            <GlobalStyles />
+            <div className="wrapper">
+                <PopUser />
 
-            <PopNewCard />
+                <PopNewCard />
 
-            <PopBrowse />
+                <PopBrowse />
 
-            <Header />
-            {loading ? <LoadExpect /> : <Main />}
-        </div>
+                <Header />
+                {loading ? <LoadExpect /> : <Main />}
+            </div>
+        </>
     )
 }
 

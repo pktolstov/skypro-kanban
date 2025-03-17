@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-export const SHeader = styled.header`
-    .header {
-        width: 100%;
-        margin: 0 auto;
-        background-color: #ffffff;
-    }
+const SHeader = styled.header`
+    width: 100%;
+    margin: 0 auto;
+    background-color: #ffffff;
+
     .header__user:hover {
         color: #33399b;
     }
@@ -12,12 +11,12 @@ export const SHeader = styled.header`
         border-left-color: #33399b;
         border-bottom-color: #33399b;
     }
-    .container {
+    /* .container {
         max-width: 1260px;
         width: 100%;
         margin: 0 auto;
         padding: 0 30px;
-    }
+    } */
 
     .header__block {
         height: 70px;
@@ -84,8 +83,8 @@ export const SHeader = styled.header`
         right: 0;
         width: auto;
         height: auto;
-        /* width: 213px;
-    height: 205px; */
+        width: 213px;
+    height: 205px; 
         border-radius: 10px;
         border: 0.7px solid rgba(148, 166, 190, 0.4);
         background: #fff;
@@ -115,3 +114,11 @@ export const SHeader = styled.header`
         }
     }
 `
+const HeaderContainer = styled.div`
+    max-width: 1260px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+`
+export { HeaderContainer, SHeader }
+

@@ -1,12 +1,6 @@
 import styled from 'styled-components'
 
-export const colors = {
-    'Web Design': '#ffe4c2',
-    Research: '#b4fdd1',
-    Copywriting: '#e9d4ff',
-}
-
-export const SCard = styled.div`
+const SCard = styled.div`
     .cards__item {
         padding: 5px;
         animation-name: card-animation;
@@ -101,3 +95,20 @@ export const SCard = styled.div`
         }
     }
 `
+
+const CardTheme = styled.div`
+    width: auto;
+    height: 20px;
+    padding: 5px 14px;
+    border-radius: 18px;
+    background-color: ${({ $theme }) => {
+            return `${$theme.backgroundColor};`
+        }}
+        p {
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 10px;
+    }
+`
+
+export { CardTheme, SCard }

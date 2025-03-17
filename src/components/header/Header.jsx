@@ -1,4 +1,4 @@
-import { SHeader } from "./Header.styled"
+import * as S from "./Header.styled"
 import { useState } from "react"
 
 export default function Header() {
@@ -7,9 +7,8 @@ export default function Header() {
         setIsVisible(!isVisible);
       }
     return (
-        <SHeader>
-        <header className="header">
-            <div className="container">
+        <S.SHeader >
+            <S.HeaderContainer>
                 <div className="header__block">
                     <div className="header__logo _show _light">
                         <a href="" target="_self">
@@ -38,7 +37,7 @@ export default function Header() {
                             className="header__pop-user-set pop-user-set"
                             id="user-set-target"
                         >
-                            <a href="">x</a>
+
                             <p className="pop-user-set__name">Ivan Ivanov</p>
                             <p className="pop-user-set__mail">
                                 ivan.ivanov@gmail.com
@@ -57,8 +56,7 @@ export default function Header() {
                         </div>
                     </nav>
                 </div>
-            </div>
-        </header>
-        </SHeader>
+            </S.HeaderContainer>
+        </S.SHeader>
     )
 }
