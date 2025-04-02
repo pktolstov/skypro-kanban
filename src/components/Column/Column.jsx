@@ -14,6 +14,7 @@ export default function Column({ title, cards }) {
                             theme={card.theme}
                             date={card.date}
                             title={card.title}
+                            id={card.id}
                         />
                     )
                 })}

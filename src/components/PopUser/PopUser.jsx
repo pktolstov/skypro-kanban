@@ -1,4 +1,11 @@
-export default function PopUser() {
+import { Link, useNavigate } from 'react-router-dom'
+
+function PopUser({ setIsAuth }) {
+    const navigate = useNavigate()
+    const handleLogin = () => {
+        setIsAuth(false)
+        navigate('/')
+    }
     return (
         <div className="pop-exit" id="popExit">
             <div className="pop-exit__container">
@@ -12,13 +19,15 @@ export default function PopUser() {
                                 className="pop-exit__exit-yes _hover01"
                                 id="exitYes"
                             >
-                                <a href="modal/signin.html">Да, выйти</a>
+                                <Link to="/signIn">Да, выйти</Link>
                             </button>
                             <button
                                 className="pop-exit__exit-no _hover03"
                                 id="exitNo"
                             >
-                                <a href="main.html">Нет, остаться</a>
+                                <Link to="/" onClick={handleLogin}>
+                                    Нет, остаться
+                                </Link>
                             </button>
                         </div>
                     </form>
@@ -27,3 +36,5 @@ export default function PopUser() {
         </div>
     )
 }
+
+export default PopUser

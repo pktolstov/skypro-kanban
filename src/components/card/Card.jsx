@@ -1,5 +1,6 @@
 import { CardTheme, SCard } from './Card.styled'
 import { colors } from '../../Constants/theme'
+import { Link } from 'react-router-dom'
 let color = (cardTheme) => {
     if (cardTheme === 'Web Design') {
         return '_orange'
@@ -10,7 +11,7 @@ let color = (cardTheme) => {
     }
 }
 
-export function Card({ theme, date, title }) {
+export function Card({ theme, date, title,id }) {
     return (
         <SCard>
             <div className="cards__item">
@@ -21,13 +22,13 @@ export function Card({ theme, date, title }) {
                             <p className={color(theme)}>{theme}</p>
                         </CardTheme>
 
-                        <a href="#popBrowse" target="_self">
+                        <Link to={`/card/${id}`} target="_self">
                             <div className="card__btn">
                                 <div></div>
                                 <div></div>
                                 <div></div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                     <div className="card__content">
                         <a href="" target="_blank">
