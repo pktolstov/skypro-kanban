@@ -1,11 +1,15 @@
+import { useParams, useNavigate } from 'react-router-dom'
 import Calendar from '../Calendar/Calendar'
 export default function PopBrowse() {
+    const { id } = useParams()
+    const navigate = useNavigate()
     return (
         <div className="pop-browse" id="popBrowse">
             <div className="pop-browse__container">
                 <div className="pop-browse__block">
                     <div className="pop-browse__content">
                         <div className="pop-browse__top-block">
+                            <h2 className="pop-browse__ttl">ID: {id}</h2>
                             <h3 className="pop-browse__ttl">Название задачи</h3>
                             <div className="categories__theme theme-top _orange _active-category">
                                 <p className="_orange">Web Design</p>
@@ -92,8 +96,12 @@ export default function PopBrowse() {
                                     <a href="#">Удалить задачу</a>
                                 </button>
                             </div>
-                            <button className="btn-edit__close _btn-bg _hover01">
-                                <a href="#">Закрыть</a>
+                            <button
+                                type="button"
+                                className="btn-edit__close _btn-bg _hover01"
+                                onClick={navigate('/')}
+                            >
+                                Закрыть
                             </button>
                         </div>
                     </div>

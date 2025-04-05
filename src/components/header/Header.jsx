@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import * as S from "./Header.styled"
 import { useState } from "react"
 
@@ -51,7 +52,7 @@ export default function Header() {
                                 />
                             </div>
                             <button type="button" className="_hover03">
-                                <a href="#popExit">Выйти</a>
+                                <Link to="/exit">Выйти</Link>
                             </button>
                         </div>
                     </nav>
