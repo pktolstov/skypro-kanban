@@ -1,14 +1,16 @@
 import Column from '../Column/Column'
-import { cardList } from '../../data'
 import { SMain } from './Main.styled'
+
+
 const columnList = [
     'Без статуса',
     'Нужно сделать',
-    'В работе',
+    'in-progress',
     'Тестирование',
     'Готово',
 ]
-export default function Main() {
+
+export default function Main({cardList}) {
     return (
         <SMain className="main">
             <div className="container">
@@ -19,7 +21,7 @@ export default function Main() {
                                 <Column
                                     title={column}
                                     key={column}
-                                    cards={cardList.filter((card) => {
+                                    cards={cardList.tasks.filter((card) => {
                                         return card.status === column
                                     })}
                                 />

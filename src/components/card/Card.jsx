@@ -12,6 +12,12 @@ let color = (cardTheme) => {
 }
 
 export function Card({ theme, date, title,id }) {
+    let dateComment = new Date("2025-04-05T15:34:32.434Z")
+  .toLocaleDateString('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+  });
     return (
         <SCard>
             <div className="cards__item">
@@ -67,7 +73,7 @@ export function Card({ theme, date, title,id }) {
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p>{date}</p>
+                            <p>{dateComment}</p>
                         </div>
                     </div>
                 </div>

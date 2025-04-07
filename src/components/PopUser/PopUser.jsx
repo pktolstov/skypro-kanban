@@ -1,10 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
-
+import { cleanUserData } from '../services/auth'
 function PopUser({ setIsAuth }) {
     const navigate = useNavigate()
-    const handleLogin = () => {
+    const handleLogout = (event) => {
+        event.preventDefault()
         setIsAuth(false)
-        navigate('/')
+        localStorage.removeItem('userInfo');
+        navigate('/singIn')
     }
     return (
         <div className="pop-exit" id="popExit">
@@ -15,17 +17,17 @@ function PopUser({ setIsAuth }) {
                     </div>
                     <form className="pop-exit__form" id="formExit" action="#">
                         <div className="pop-exit__form-group">
-                            <button
+                            <button onClick={handleLogout}
                                 className="pop-exit__exit-yes _hover01"
                                 id="exitYes"
                             >
-                                <Link to="/signIn">Да, выйти</Link>
+                                 Да, выйти
                             </button>
                             <button
                                 className="pop-exit__exit-no _hover03"
                                 id="exitNo"
                             >
-                                <Link to="/" onClick={handleLogin}>
+                                <Link to="/" >
                                     Нет, остаться
                                 </Link>
                             </button>

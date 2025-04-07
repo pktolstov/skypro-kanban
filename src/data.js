@@ -42,3 +42,15 @@ export const cardList = [
     status: "Готово",
 },
 ]
+
+export const cardApi = [
+{
+    "_id": "67f14d881ea2e4552608a515",
+    "userId": "6421860c32e0301869fb3301",
+    "title": "Новая задача",
+    "topic": "Research",
+    "date": "2025-04-05T15:34:32.434Z",
+    "status": "Без статуса",
+    "description": "Подробное описание задачи"
+}
+]
