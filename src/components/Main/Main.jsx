@@ -11,6 +11,7 @@ const columnList = [
 ]
 
 export default function Main({cardList}) {
+    
     return (
         <SMain className="main">
             <div className="container">

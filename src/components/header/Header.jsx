@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import * as S from './Header.styled'
 import { useState } from 'react'
-import { getToken } from '../services/auth'
+import { getToken } from '../../services/auth'
 
 export default function Header() {
     const [isVisible, setIsVisible] = useState(false)
@@ -34,7 +34,7 @@ export default function Header() {
                             href="#user-set-target"
                             className="header__user _hover02"
                         >
-                            Ivan Ivanov
+                            {getToken().name}
                         </a>
                         <div
                             style={{ display: isVisible ? 'block' : 'none' }}

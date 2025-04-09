@@ -28,7 +28,7 @@ export function Card({ theme, date, title,id }) {
                             <p className={color(theme)}>{theme}</p>
                         </CardTheme>
 
-                        <Link to={`/card/${id}`} target="_self">
+                        <Link to={`/card/${id}` } target="_self">
                             <div className="card__btn">
                                 <div></div>
                                 <div></div>

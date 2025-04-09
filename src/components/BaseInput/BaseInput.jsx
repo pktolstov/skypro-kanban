@@ -1,8 +1,8 @@
 import * as S from './BaseInput.styled'
 function BaseInput({ error, type, name, id, placeholder, value, onChange }) {
     return (
-        <S.Container style={{ backgroundColor: '#fff' }}>
-            <S.Input className={error? 'error': ''}
+       <S.Container style={{ backgroundColor: '#fff' }}>
+            <S.Input className={error? 'error': ''} style={error ? { borderColor: 'red' } : {}}
                 type={type}
                 placeholder={placeholder}
                 value={value}
@@ -16,11 +16,11 @@ function BaseInput({ error, type, name, id, placeholder, value, onChange }) {
     )
 }
 
-function BaseButton({ id, onSubmit }) {
+function BaseButton({ id, text, onSubmit }) {
     return (
         <>
-            <S.Button id={id} onClick={onSubmit}>
-                Войти
+            <S.Button type='button' id={id} onClick={onSubmit}>
+                {text}
             </S.Button>
         </>
     )

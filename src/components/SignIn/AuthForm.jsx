@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import * as S from './SignIn.styled'
 import { BaseInput, BaseButton } from '../BaseInput/BaseInput'
-import { useNavigate, Link } from 'react-router-dom'
-import { signIn, signUp } from '../services/auth'
+import { useNavigate } from 'react-router-dom'
+import { signIn, signUp } from '../../services/auth'
 
 const AuthForm = ({ isSignUp, setIsAuth }) => {
     const navigate = useNavigate()
@@ -41,7 +41,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
         }
         if (!formData.password.trim()) {
             newErrors.password = true
-            setError('Заполните все поля')
+            setError('Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.')
             isValid = false
         }
         setErrors(newErrors)
@@ -75,7 +75,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
             if (data) {
                 setIsAuth(true)
                 localStorage.setItem('userInfo', JSON.stringify(data))
-                
+
                 navigate('/')
             }
         } catch (err) {
@@ -89,66 +89,66 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
             <S.Card>
                 <S.Title>{isSignUp ? 'Регистрация' : 'Вход'}</S.Title>
                 <S.Form id="form" onSubmit={handleSubmit}>
-                  
-                    {isSignUp && (
+                    <S.InputForm>
+                        {isSignUp && (
+                            <BaseInput
+                                error={errors.name}
+                                type="text"
+                                name="name"
+                                id="formname"
+                                placeholder="Имя"
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
+                        )}
+
                         <BaseInput
-                            error={errors.name}
+                            error={errors.login}
                             type="text"
-                            name="name"
-                            id="formname"
-                            placeholder="Имя"
-                            value={formData.name}
+                            name="login"
+                            id="formlogin"
+                            placeholder="Эл. почта"
+                            value={formData.login}
                             onChange={handleChange}
                         />
-                    )}
-                
-                    <BaseInput
-                        error={errors.login}
-                        type="text"
-                        name="login"
-                        id="formlogin"
-                        placeholder="Эл. почта"
-                        value={formData.login}
-                        onChange={handleChange}
-                    />
-                    
-                    <BaseInput
-                        error={errors.password}
-                        type="password"
-                        name="password"
-                        id="formpassword"
-                        placeholder="Пароль"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-                    
-                    <div>
-                        <p style={{ color: 'red' }}>{error}</p>
-                    </div>
-                    <BaseButton
-                        // type="secondary"
-                        // fullWidth={true}
-                        text={isSignUp ? 'Зарегистрироваться' : 'Войти'}
-                    />
+
+                        <BaseInput
+                            style={error ? { borderColor: 'red' } : {}}
+                            error={errors.password}
+                            type="password"
+                            name="password"
+                            id="formpassword"
+                            placeholder="Пароль"
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
+                    </S.InputForm>
+
+                    <S.ErrorText style={{ color: 'red' }}>{error}</S.ErrorText>
                 </S.Form>
-                
-                    {!isSignUp && (
-                        <S.Text>
-                            Нужно зарегистрироваться?{' '}
-                            <S.Link href="/signUp">
-                                Регистрируйтесь здесь
+                <BaseButton
+                    type="button"
+                    onSubmit={handleSubmit}
+                    // type="secondary"
+                    // fullWidth={true}
+                    text={isSignUp ? 'Зарегистрироваться' : 'Войти'}
+                />
+                {!isSignUp && (
+                    <S.Text>
+                        Нужно зарегистрироваться?{' '}
+                        <S.Link href="/signUp">Регистрируйтесь здесь</S.Link>
+                    </S.Text>
+                )}
+                {isSignUp && (
+                    <S.Text>
+                        Уже есть аккаунт?{' '}
+                        <span>
+                            <S.Link style={{ fontSize: '14px' }} href="/signIn">
+                                Войдите здесь
                             </S.Link>
-                        </S.Text>
-                    )}
-                    {isSignUp && (
-                        <S.Text>
-                            Уже есть аккаунт?{' '}
-                            <span>
-                                <S.Link href="/signIn">Войдите здесь</S.Link>
-                            </span>{' '}
-                        </S.Text>
-                    )}
-                
+                        </span>{' '}
+                    </S.Text>
+                )}
             </S.Card>
         </S.Container>
     )
