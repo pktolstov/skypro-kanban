@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
-// import PopNewCard from './components/PopNewCard/PopNewCard'
-// import PopBrowse from './components/PopBrowse/PopBrowse'
+import { useState } from 'react'
+
 import MainPage from './pages/MainPage'
 import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
@@ -8,25 +7,23 @@ import NotFoundPage from './pages/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
 import ExitPage from './pages/ExitPage'
 import CardPage from './pages/CardPage'
-// import { LoadExpect } from './components/Adition/Adition'
-// import PopUser from './components/PopUser/PopUser'
-// import { GlobalStyles } from './GlobalStyles.styled'
-import { Route, Routes } from 'react-router-dom'
+
+import { Route, Routes, data } from 'react-router-dom'
+import { fetchCards } from './services/api'
+import AuthForm from './components/SignIn/AuthForm'
+import { cleanUserData, getToken } from './services/auth'
 
 function AppRoutes() {
-    const [isAuth, setIsAuth] = useState(false)
-    const [loading, setLoading] = useState(true)
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000)
-    }, [loading])
+    const [isAuth, setIsAuth] = useState(!!getToken())
 
     return (
         <Routes>
             <Route element={<PrivateRoute isAuth={isAuth} />}>
-                <Route path="/" element={<MainPage loading={loading} />}>
-                    <Route path="/exit" element={<ExitPage />} />
+                <Route path="/" element={<MainPage />}>
+                    <Route
+                        path="/exit"
+                        element={<ExitPage setIsAuth={setIsAuth} />}
+                    />
                     <Route path="/card/:id" element={<CardPage />} />
                 </Route>
             </Route>
@@ -34,7 +31,10 @@ function AppRoutes() {
                 path="/signIn"
                 element={<SignInPage setIsAuth={setIsAuth} />}
             />
-            <Route path="/signUp" element={<SignUpPage />} />
+            <Route
+                path="/signUp"
+                element={<SignUpPage setIsAuth={setIsAuth} />}
+            />
 
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
@@ -42,5 +42,3 @@ function AppRoutes() {
 }
 
 export default AppRoutes
-
-// /, /exit, /card/:id, /login, /register, *.

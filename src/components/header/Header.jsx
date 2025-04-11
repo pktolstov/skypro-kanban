@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
-import * as S from "./Header.styled"
-import { useState } from "react"
+import { Link } from 'react-router-dom'
+import * as S from './Header.styled'
+import { useState } from 'react'
+import { getToken } from '../../services/auth'
 
 export default function Header() {
     const [isVisible, setIsVisible] = useState(false)
     const getVisibility = () => {
-        setIsVisible(!isVisible);
-      }
+        setIsVisible(!isVisible)
+    }
     return (
-        <S.SHeader >
+        <S.SHeader>
             <S.HeaderContainer>
                 <div className="header__block">
                     <div className="header__logo _show _light">
@@ -28,20 +29,23 @@ export default function Header() {
                         >
                             <a href="#popNewCard">Создать новую задачу</a>
                         </button>
-                        <a onClick={getVisibility}
+                        <a
+                            onClick={getVisibility}
                             href="#user-set-target"
                             className="header__user _hover02"
                         >
-                            Ivan Ivanov
-                        </a >
-                        <div style={{ display: isVisible ? 'block' : 'none' }}
+                            {getToken().name}
+                        </a>
+                        <div
+                            style={{ display: isVisible ? 'block' : 'none' }}
                             className="header__pop-user-set pop-user-set"
                             id="user-set-target"
                         >
-
-                            <p className="pop-user-set__name">Ivan Ivanov</p>
+                            <p className="pop-user-set__name">
+                                {getToken().name}
+                            </p>
                             <p className="pop-user-set__mail">
-                                ivan.ivanov@gmail.com
+                                {getToken().login}
                             </p>
                             <div className="pop-user-set__theme">
                                 <p>Темная тема</p>

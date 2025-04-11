@@ -1,10 +1,10 @@
-import SignUp from '../components/SignUp/SignUp'
 import { GlobalStyles } from '../GlobalStyles.styled'
-function SignUpPage() {
+import AuthForm from '../components/SignIn/AuthForm'
+function SignUpPage({ setIsAuth }) {
     return (
         <>
             <GlobalStyles />
-            <SignUp />
+            <AuthForm setIsAuth={setIsAuth} isSignUp={true} />
         </>
     )
 }

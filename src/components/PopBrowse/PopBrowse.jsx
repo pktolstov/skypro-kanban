@@ -1,8 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import Calendar from '../Calendar/Calendar'
+
 export default function PopBrowse() {
     const { id } = useParams()
     const navigate = useNavigate()
+
+
+    
     return (
         <div className="pop-browse" id="popBrowse">
             <div className="pop-browse__container">
@@ -10,7 +14,7 @@ export default function PopBrowse() {
                     <div className="pop-browse__content">
                         <div className="pop-browse__top-block">
                             <h2 className="pop-browse__ttl">ID: {id}</h2>
-                            <h3 className="pop-browse__ttl">Название задачи</h3>
+                            <h3 className="pop-browse__ttl">Новая задача</h3>
                             <div className="categories__theme theme-top _orange _active-category">
                                 <p className="_orange">Web Design</p>
                             </div>
