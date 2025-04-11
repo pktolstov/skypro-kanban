@@ -1,6 +1,6 @@
 import Column from '../Column/Column'
 import { SMain } from './Main.styled'
-
+import { CardsProvider } from '../../context/CardsProvider'
 
 const columnList = [
     'Без статуса',
@@ -10,27 +10,28 @@ const columnList = [
     'Готово',
 ]
 
-export default function Main({cardList}) {
-    
+export default function Main({ cardList }) {
     return (
-        <SMain className="main">
-            <div className="container">
-                <div className="main__block">
-                    <div className="main__content">
-                        {columnList.map((column) => {
-                            return (
-                                <Column
-                                    title={column}
-                                    key={column}
-                                    cards={cardList.tasks.filter((card) => {
-                                        return card.status === column
-                                    })}
-                                />
-                            )
-                        })}
+        <CardsProvider>
+            <SMain className="main">
+                <div className="container">
+                    <div className="main__block">
+                        <div className="main__content">
+                            {columnList.map((column) => {
+                                return (
+                                    <Column
+                                        title={column}
+                                        key={column}
+                                        cards={cardList.filter((card) => {
+                                            return card.status === column
+                                        })}
+                                    />
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </SMain>
+            </SMain>
+        </CardsProvider>
     )
 }

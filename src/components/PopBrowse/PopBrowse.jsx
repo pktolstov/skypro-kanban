@@ -1,12 +1,58 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import classNames from 'classnames'
 import Calendar from '../Calendar/Calendar'
-
+import { useContext } from 'react'
+import { CardsContext } from '../../context/CardsContext'
 export default function PopBrowse() {
     const { id } = useParams()
     const navigate = useNavigate()
 
+    const { cards, updateCard } = useContext(CardsContext)
+    const [isEditable, setIsEditable] = useState(false)
+    const [card, setCard] = useState(null)
+    const [status, setStatus] = useState('') // Состояние выбранного статуса
+    const [originalData, setOriginalData] = useState(null)
+    useEffect(() => {
+        const foundCard = cards.find((c) => c._id === id)
+        if (foundCard) {
+            setCard(foundCard)
+            setStatus(foundCard.status)
+            setOriginalData({
+                // Сохраняем оригинальные данные
+                description: foundCard.description,
+                status: foundCard.status,
+                date: foundCard.date,
+            })
+        }
+    }, [id, cards])
 
-    
+    const handleSave = async () => {
+        const updated = {
+            ...card,
+            description: card.description, // обнови что нужно
+            // status: ...
+        }
+        await updateCard({ card: updated, id })
+        
+        setIsEditable(false) // После сохранения выключаем редактирование
+     
+        // navigate('/')
+    }
+    const handleEdit = () => {
+        setIsEditable(true) // Включаем редактирование
+    }
+    const handleCancel = () => {
+        // Восстанавливаем оригинальные данные
+        setCard({
+            ...card,
+            description: originalData.description,
+        })
+        setStatus(originalData.status)
+        setIsEditable(false)
+    }
+
+    // {classNames('status__theme', { '_hide': card?.status !== 'Без статуса' })}
     return (
         <div className="pop-browse" id="popBrowse">
             <div className="pop-browse__container">
@@ -14,27 +60,89 @@ export default function PopBrowse() {
                     <div className="pop-browse__content">
                         <div className="pop-browse__top-block">
                             <h2 className="pop-browse__ttl">ID: {id}</h2>
-                            <h3 className="pop-browse__ttl">Новая задача</h3>
-                            <div className="categories__theme theme-top _orange _active-category">
-                                <p className="_orange">Web Design</p>
+                            <h3 className="pop-browse__ttl">{card?.title}</h3>
+                            <div
+                                className="categories__theme theme-top _active-category"
+                                style={{
+                                    backgroundColor:
+                                        card?.topic === 'Web Design'
+                                            ? '#ffe4c2'
+                                            : card?.topic === 'Research'
+                                            ? '#b4fdd1'
+                                            : card?.topic === 'Copywriting'
+                                            ? '#e9d4ff'
+                                            : '',
+                                }}
+                            >
+                                <p
+                                    className={
+                                        card?.topic === 'Web Design'
+                                            ? '_orange'
+                                            : card?.topic === 'Research'
+                                            ? '_green'
+                                            : card?.topic === 'Copywriting'
+                                            ? '_purple'
+                                            : ''
+                                    }
+                                >
+                                    {card?.topic}
+                                </p>
                             </div>
                         </div>
                         <div className="pop-browse__status status">
                             <p className="status__p subttl">Статус</p>
                             <div className="status__themes">
-                                <div className="status__theme _hide">
+                            <div
+                                    className={classNames('status__theme', '_gray', {
+                                        _hide: isEditable,
+                                       
+                                    })}
+                                >
+                                    <p>{card?.status}</p>
+                                </div>
+                                <div
+                                    className={classNames('status__theme', {
+                                        _hide: !isEditable,
+                                        _gray: card?.status === 'Без статуса',
+                                    })}
+                                >
                                     <p>Без статуса</p>
                                 </div>
-                                <div className="status__theme _gray">
-                                    <p className="_gray">Нужно сделать</p>
+                                <div
+                                    className={classNames('status__theme', {
+                                        _hide: !isEditable,
+                                        _gray: card?.status === 'Нужно сделать',
+                                    })}
+                                >
+                                    <p>Нужно сделать</p>
                                 </div>
-                                <div className="status__theme _hide">
-                                    <p>В работе</p>
+                                <div
+                                    className={classNames('status__theme', {
+                                        _hide: !isEditable,
+                                        _gray: card?.status === 'in-progress',
+                                    })}
+                                >
+                                    <p>
+                                        {' '}
+                                        {card?.status === 'in-progress'
+                                            ? 'В работе'
+                                            : card?.status}
+                                    </p>
                                 </div>
-                                <div className="status__theme _hide">
+                                <div
+                                    className={classNames('status__theme', {
+                                        _hide: !isEditable,
+                                        _gray: card?.status === 'Тестирование',
+                                    })}
+                                >
                                     <p>Тестирование</p>
                                 </div>
-                                <div className="status__theme _hide">
+                                <div
+                                    className={classNames('status__theme', {
+                                        _hide: !isEditable,
+                                        _gray: card?.status === 'Готово',
+                                    })}
+                                >
                                     <p>Готово</p>
                                 </div>
                             </div>
@@ -56,8 +164,22 @@ export default function PopBrowse() {
                                         className="form-browse__area"
                                         name="text"
                                         id="textArea01"
-                                        readOnly
                                         placeholder="Введите описание задачи..."
+                                        value={card?.description || ''}
+                                        onChange={(e) =>
+                                            setCard({
+                                                ...card,
+                                                description: e.target.value,
+                                            })
+                                        }
+                                        readOnly={!isEditable}
+                                        style={{
+                                            backgroundColor: isEditable
+                                                ? '#f0f8ff'
+                                                : '', // Меняем фон в зависимости от редактирования
+                                            transition:
+                                                'background-color 0.3s ease', // Плавное изменение фона
+                                        }}
                                     ></textarea>
                                 </div>
                             </form>
@@ -72,26 +194,50 @@ export default function PopBrowse() {
                                 <p className="_orange">Web Design</p>
                             </div>
                         </div>
-                        <div className="pop-browse__btn-browse">
+                        <div
+                            className={classNames('pop-browse__btn-browse', {
+                                _hide: isEditable,
+                            })}
+                        >
                             <div className="btn-group">
-                                <button className="btn-browse__edit _btn-bor _hover03">
-                                    <a href="#">Редактировать задачу</a>
+                                <button
+                                    type="button"
+                                    className="btn-browse__edit _btn-bor _hover03"
+                                    onClick={handleEdit} // Включаем редактирование
+                                >
+                                    Редактировать задачу
                                 </button>
+
                                 <button className="btn-browse__delete _btn-bor _hover03">
                                     <a href="#">Удалить задачу</a>
                                 </button>
                             </div>
-                            <button className="btn-browse__close _btn-bg _hover01">
-                                <a href="#">Закрыть</a>
+                            <button
+                                className="btn-browse__close _btn-bg _hover01"
+                                onClick={() => navigate('/')}
+                            >
+                                Закрыть
                             </button>
                         </div>
-                        <div className="pop-browse__btn-edit _hide">
+                        <div
+                            className={classNames('pop-browse__btn-edit', {
+                                _hide: !isEditable,
+                            })}
+                        >
                             <div className="btn-group">
-                                <button className="btn-edit__edit _btn-bg _hover01">
-                                    <a href="#">Сохранить</a>
+                                <button
+                                    type="button"
+                                    className="btn-edit__edit _btn-bg _hover01"
+                                    onClick={handleSave}
+                                >
+                                    Сохранить
                                 </button>
-                                <button className="btn-edit__edit _btn-bor _hover03">
-                                    <a href="#">Отменить</a>
+                                <button
+                                    className="btn-edit__edit _btn-bor _hover03"
+                                    type="button"
+                                    onClick={handleCancel}
+                                >
+                                    Отменить
                                 </button>
                                 <button
                                     className="btn-edit__delete _btn-bor _hover03"
@@ -103,7 +249,6 @@ export default function PopBrowse() {
                             <button
                                 type="button"
                                 className="btn-edit__close _btn-bg _hover01"
-                                onClick={navigate('/')}
                             >
                                 Закрыть
                             </button>

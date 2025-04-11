@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import * as S from './SignIn.styled'
 import { BaseInput, BaseButton } from '../BaseInput/BaseInput'
 import { useNavigate } from 'react-router-dom'
 import { signIn, signUp } from '../../services/auth'
+import { AuthContext } from '../../context/AuthContext'
+
 
 const AuthForm = ({ isSignUp, setIsAuth }) => {
+    const {updateUserInfo} = useContext(AuthContext)
     const navigate = useNavigate()
     // состояние полей
     const [formData, setFormData] = useState({
@@ -73,8 +76,9 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                   })
                 : await signUp(formData)
             if (data) {
-                setIsAuth(true)
-                localStorage.setItem('userInfo', JSON.stringify(data))
+                updateUserInfo(data)
+                // setIsAuth(true)
+                // localStorage.setItem('userInfo', JSON.stringify(data))
 
                 navigate('/')
             }
