@@ -9,9 +9,8 @@ import ExitPage from './pages/ExitPage'
 import CardPage from './pages/CardPage'
 
 import { Route, Routes, data } from 'react-router-dom'
-import { fetchCards } from './services/api'
-import AuthForm from './components/SignIn/AuthForm'
-import { cleanUserData, getToken } from './services/auth'
+
+import { getToken } from './services/auth'
 
 function AppRoutes() {
     const [isAuth, setIsAuth] = useState(!!getToken())

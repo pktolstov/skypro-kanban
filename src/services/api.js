@@ -8,12 +8,13 @@ export async function fetchCards({ token }) {
                 Authorization: 'Bearer ' + token,
             },
         })
-        return data.data
+        return data.data.tasks
         // когда работаем с axios, не забываем, что результат лежит в ключе datа
     } catch (error) {
         throw new Error(error.message)
     }
 }
+
 
 export async function postCard({ token, card }) {
     try {
@@ -31,12 +32,13 @@ export async function postCard({ token, card }) {
 
 export async function editCard({ token, id, card }) {
     try {
-        const data = await axios.patch(API_URL + id, card, {
+        const data = await axios.put(API_URL + '/' + id, card, {
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'text/html',
             },
         })
+        
         return data.data.tasks
     } catch (error) {
         throw new Error(error.message)
