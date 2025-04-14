@@ -1,5 +1,5 @@
 import { ClipLoader } from 'react-spinners'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 const Loader = () => {
     return (
         <div
@@ -8,13 +8,13 @@ const Loader = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh', // На всю высоту экрана
+                height: '100vh',
             }}
         >
             <div className="pop-exit__ttl">
                 <h2>Идет загрузка...</h2>
             </div>
-            <ClipLoader color="#3936d7" size={100} /> {/* Увеличиваем size */}
+            <ClipLoader color="#3936d7" size={100} /> 
         </div>
     )
 }

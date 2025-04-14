@@ -60,17 +60,6 @@ export const Footer = styled.div`
     }
 `;
 
-// .calendar__nav {
-//     width: 100%;
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//     margin-top: 14px;
-//     padding: 0 7px;
-// }
-// .calendar__period {
-//     padding: 0 7px;
-// }
 
 export const Nav = styled.div`
      width: 100%;

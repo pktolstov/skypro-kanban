@@ -38,7 +38,7 @@ export default function PopBrowse() {
         if (!card?.description.trim()) {
             newErrors.description = 'Описание задачи обязательно'
         } else if (card.description.trim().length < 3) {
-            newErrors.description = 'Описание должно содержать минимум 10 символов'
+            newErrors.description = 'Описание должно содержать минимум 3 символа'
         }
         
         setErrors(newErrors)
@@ -78,7 +78,7 @@ export default function PopBrowse() {
         setIsEditable(true) // Включаем редактирование
     }
     const handleCancel = () => {
-        // Восстанавливаем оригинальные данные
+       
         setCard({
             ...card,
             description: originalData.description,
@@ -86,7 +86,7 @@ export default function PopBrowse() {
             date: originalData.date,
         })
         setStatus(originalData.status)
-        setSelectedDate(originalData.date)
+        setSelectedDate(dayjs(originalData.date).format('DD.MM.YYYY'))
         setIsEditable(false)
     }
 

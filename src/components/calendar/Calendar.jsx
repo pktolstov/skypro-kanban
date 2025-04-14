@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
 
@@ -6,7 +6,7 @@ import * as S from './Calendar.styled'
 dayjs.locale('ru')
 export default function Calendar({ selectedDate, onDateSelect }) {
 
-    const [selectedDay, setSelectedDay] = useState(selectedDate)
+    // const [selectedDay, setSelectedDay] = useState(selectedDate)
     const [currentMonth, setCurrentMonth] = useState(dayjs())
 
     const startOfMonth = currentMonth.startOf('month')
@@ -128,7 +128,6 @@ export default function Calendar({ selectedDate, onDateSelect }) {
                     {!selectedDate
                         ? 'Выберите срок исполнения '
                         : 'Срок исполнения: '}
-                    {/* Выберите срок исполнения:{' '} */}
                     <span className="date-control">{selectedDate || ''}</span>
                 </p>
             </div>

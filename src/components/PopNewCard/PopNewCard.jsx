@@ -47,8 +47,6 @@ export default function PopNewCard() {
                 title: title.trim(),
                 description: description.trim(),
                 topic,
-                // status: "Без статуса",
-                // date: date || dayjs(date, 'DD.MM.YYYY').toISOString(),
                 date: date || dayjs().format('DD.MM.YYYY'),
             }
 

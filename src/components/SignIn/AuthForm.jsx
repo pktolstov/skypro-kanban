@@ -6,24 +6,24 @@ import { signIn, signUp } from '../../services/auth'
 import { AuthContext } from '../../context/AuthContext'
 
 
-const AuthForm = ({ isSignUp, setIsAuth }) => {
+const AuthForm = ({ isSignUp}) => {
     const {updateUserInfo} = useContext(AuthContext)
     const navigate = useNavigate()
-    // состояние полей
+
     const [formData, setFormData] = useState({
         name: '',
         login: '',
         password: '',
     })
-    // состояние ошибок
+   
     const [errors, setErrors] = useState({
         name: '',
         login: '',
         password: '',
     })
-    // состояние текста ошибки, чтобы показать её пользователю
+   
     const [error, setError] = useState('')
-    // функция валидации
+
     const validateForm = () => {
         const newErrors = {
             name: '',
@@ -50,7 +50,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
         setErrors(newErrors)
         return isValid
     }
-    // функция, которая отслеживает в полях изменения и меняет состояние компонента
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({
@@ -60,15 +60,15 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
         setErrors({ ...errors, [name]: false })
         setError('')
     }
-    // функция отправки формы
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!validateForm()) {
-            // если у нас форма не прошла валидацию, то дальше не продолжаем
+           
             return
         }
         try {
-            // чтобы не писать две разных функции, выберем нужный запрос через тернарный оператор
+            
             const data = !isSignUp
                 ? await signIn({
                       login: formData.login,
@@ -77,8 +77,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                 : await signUp(formData)
             if (data) {
                 updateUserInfo(data)
-                // setIsAuth(true)
-                // localStorage.setItem('userInfo', JSON.stringify(data))
+
 
                 navigate('/')
             }
