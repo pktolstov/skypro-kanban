@@ -87,7 +87,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
         }
     }
     return (
-        // <SignIn />
+    
 
         <S.Container>
             <S.Card>
@@ -133,8 +133,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                 <BaseButton
                     type="button"
                     onSubmit={handleSubmit}
-                    // type="secondary"
-                    // fullWidth={true}
+
                     text={isSignUp ? 'Зарегистрироваться' : 'Войти'}
                 />
                 {!isSignUp && (

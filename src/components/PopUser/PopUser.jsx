@@ -1,12 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { cleanUserData } from '../../services/auth'
 function PopUser({ setIsAuth }) {
     const navigate = useNavigate()
     const handleLogout = (event) => {
         event.preventDefault()
         setIsAuth(false)
         localStorage.removeItem('userInfo')
-        navigate('/singIn')
+        navigate('/signIn')
     }
     return (
         <div className="pop-exit" id="popExit">

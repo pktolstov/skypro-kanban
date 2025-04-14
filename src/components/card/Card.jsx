@@ -12,7 +12,7 @@ let color = (cardTheme) => {
 }
 
 export function Card({ theme, date, title,id }) {
-    let dateComment = new Date("2025-04-05T15:34:32.434Z")
+    let dateComment = new Date(date)
   .toLocaleDateString('ru-RU', {
     day: '2-digit',
     month: '2-digit',

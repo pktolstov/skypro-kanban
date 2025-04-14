@@ -27,7 +27,8 @@ export default function Header() {
                             className="header__btn-main-new _hover01"
                             id="btnMainNew"
                         >
-                            <a href="#popNewCard">Создать новую задачу</a>
+                            <Link to="/newcard">Создать новую задачу</Link>
+                            
                         </button>
                         <a
                             onClick={getVisibility}
