@@ -37,7 +37,7 @@ export default function PopBrowse() {
         
         if (!card?.description.trim()) {
             newErrors.description = 'Описание задачи обязательно'
-        } else if (card.description.trim().length < 10) {
+        } else if (card.description.trim().length < 3) {
             newErrors.description = 'Описание должно содержать минимум 10 символов'
         }
         

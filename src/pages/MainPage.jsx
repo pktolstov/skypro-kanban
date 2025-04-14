@@ -9,6 +9,7 @@ import Header from '../components/Header/Header'
 import { CardsProvider } from '../context/CardsProvider'
 import { EmptyCardsPage } from '../components/Adition/Adition'
 
+
 function MainPage() {
     const [loading, setLoading] = useState(true)
     const [cards, setCards] = useState([])
@@ -32,22 +33,24 @@ function MainPage() {
         getCards()
     }, [getCards])
     return (
+        
         <CardsProvider>
             <GlobalStyles />
             <div className="wrapper">
                 <Header />
                 {loading ? (
-                    <Loader /> // Показываем лоадер, пока идёт загрузка
+                    <Loader /> 
                 ) : error ? (
-                    <span>{error}</span> // Показываем ошибку, если она есть
+                    <span>{error}</span> 
                 ) : cards.length === 0 ? (
-                    <EmptyCardsPage /> // Показываем EmptyCardsPage, если карточек нет
+                    <EmptyCardsPage /> 
                 ) : (
-                    <Main /> // Показываем Main, если карточки есть
+                    <Main /> 
                 )}
                 <Outlet />
             </div>
         </CardsProvider>
+    
     )
 }
 

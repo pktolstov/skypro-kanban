@@ -8,7 +8,7 @@ import PrivateRoute from './PrivateRoute'
 import ExitPage from './pages/ExitPage'
 import CardPage from './pages/CardPage'
 
-import { Route, Routes, data } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { getToken } from './services/auth'
 import NewCardPage from './pages/newCardPage'
