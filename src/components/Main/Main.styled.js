@@ -20,11 +20,6 @@ export const SMain = styled.main`
         width: 100%;
         display: flex;
     }
-    /* .main__column {
-        width: 20%;
-        margin: 0 auto;
-        display: block;
-    } */
 
     @media screen and (max-width: 1200px) {
         .main__block {

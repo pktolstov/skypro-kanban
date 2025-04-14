@@ -1,6 +1,7 @@
 import Column from '../Column/Column'
 import { SMain } from './Main.styled'
-import { CardsProvider } from '../../context/CardsProvider'
+import { useContext } from 'react'
+import { CardsContext } from '../../context/CardsContext'
 
 const columnList = [
     'Без статуса',
@@ -10,9 +11,12 @@ const columnList = [
     'Готово',
 ]
 
-export default function Main({ cardList }) {
+export default function Main() {
+    const { cards } = useContext(CardsContext)
+
+
     return (
-        <CardsProvider>
+   
             <SMain className="main">
                 <div className="container">
                     <div className="main__block">
@@ -22,7 +26,7 @@ export default function Main({ cardList }) {
                                     <Column
                                         title={column}
                                         key={column}
-                                        cards={cardList.filter((card) => {
+                                        cards={cards.filter((card) => {
                                             return card.status === column
                                         })}
                                     />
@@ -32,6 +36,7 @@ export default function Main({ cardList }) {
                     </div>
                 </div>
             </SMain>
-        </CardsProvider>
+
     )
+   
 }

@@ -2,21 +2,19 @@ import styled from 'styled-components'
 const SHeader = styled.header`
     width: 100%;
     margin: 0 auto;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background-color: ${({ theme }) => theme.headerBg};
+    /* color: ${({ theme }) => theme.textColor}; */
 
     .header__user:hover {
-        color: #33399b;
+        /* color: #33399b; */
+        color: ${({ theme }) => theme.textColor};
     }
     .header__user:hover::after {
         border-left-color: #33399b;
         border-bottom-color: #33399b;
     }
-    /* .container {
-        max-width: 1260px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0 30px;
-    } */
+
 
     .header__block {
         height: 70px;
