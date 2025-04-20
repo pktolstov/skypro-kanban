@@ -3,8 +3,7 @@ export const SHeader = styled.header`
     width: 100%;
     margin: 0 auto;
     background-color: #ffffff;
-    /* background-color: ${({ theme }) => theme.headerBg}; */
-    /* color: ${({ theme }) => theme.textColor}; */
+
 
 
     @media screen and (max-width: 495px) {
@@ -97,7 +96,7 @@ export const HeaderUser = styled.div`
     justify-content: center;
     font-size: 14px;
     line-height: 20px;
-    cursor: pointer; /* Добавляем курсор */
+    cursor: pointer; 
 
     a {
         color: #565eef;

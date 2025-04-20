@@ -10,15 +10,13 @@ export default function Calendar({
     isEditable,
     currentDate,
 }) {
-
     const [currentMonth, setCurrentMonth] = useState(dayjs())
 
     const startOfMonth = currentMonth.startOf('month')
     const endOfMonth = currentMonth.endOf('month')
     const startDay = startOfMonth.day() === 0 ? 6 : startOfMonth.day() - 1 // Понедельник = 0
     const daysInMonth = endOfMonth.date()
-    
-  
+
     const isToday = (day) => {
         const today = dayjs().date()
 
@@ -30,20 +28,17 @@ export default function Calendar({
         const prevMonth = currentMonth.subtract(1, 'month')
         const daysInPrevMonth = prevMonth.daysInMonth()
 
-        // Заполнить начальные дни прошлого месяца
         for (let i = startDay - 1; i >= 0; i--) {
             const date = prevMonth.date(daysInPrevMonth - i)
             days.push({ date, isCurrentMonth: false })
         }
 
-        // Текущий месяц
         for (let i = 1; i <= daysInMonth; i++) {
             const date = currentMonth.date(i)
 
             days.push({ date, isCurrentMonth: true })
         }
 
-        // Оставшиеся дни следующего месяца
         const nextDays = 42 - days.length
         const nextMonth = currentMonth.add(1, 'month')
         for (let i = 1; i <= nextDays; i++) {
@@ -123,11 +118,11 @@ export default function Calendar({
                                     }
                                     style={{
                                         backgroundColor: isCardDate
-                                            ? '#94a6be' // Серый фон для даты карточки
+                                            ? '#94a6be'
                                             : isSelectedDate
-                                            ? '#94a6be' // Выбранная дата
+                                            ? '#94a6be'
                                             : 'transparent',
-                                        fontWeight: isToday ? '700' : '400', // Жирный текст для сегодняшнего дня
+                                        fontWeight: isToday ? '700' : '400',
                                         color:
                                             isCardDate || isSelectedDate
                                                 ? '#fff'
@@ -143,45 +138,6 @@ export default function Calendar({
                             )
                         }
                     )}
-
-                    {/* {generateCalendar().map(
-                        ({ date, isCurrentMonth }, index) => (
-                            
-                            <S.CalendarCell
-                                key={index}
-
-
-                                onClick={
-                                    !isCurrentMonth && isEditable
-                                        ? () => {}
-                                        :  () => handleDateClick(date)
-                                }
-                                style={{
-                                    backgroundColor:
-                                    cardDate === isToday(date.date())
-                                            ? '#94a6be'
-                                            : '#fff',
-                                    color:
-                                    cardDate === isToday(date.date())
-                                            ? '#fff'
-                                            : '#94a6be',
-                                    fontWeight:
-                                         isToday(date.date())
-                                            ? '1000'
-                     
-                     
-                     
-                                            : '400',
-                                    opacity: isCurrentMonth ? '1' : '0',
-                                    cursor: isCurrentMonth
-                                        ? 'pointer'
-                                        : 'default',
-                                }}
-                            >
-                                {date.date()}
-                            </S.CalendarCell>
-                        )
-                    )} */}
                 </S.CalendarCells>
 
                 <input
@@ -189,21 +145,16 @@ export default function Calendar({
                     id="datepick_value"
                     value={selectedDate || ''}
                 />
-                {/* <S.CalendarPeriod>
-                <p>
-                    {!selectedDate
-                        ? 'Выберите срок исполнения '
-                        : 'Срок исполнения: '}
-                    <span>{selectedDate || ''}</span>
-                </p>
-            </S.CalendarPeriod> */}
             </S.CalendarBlock>
             <S.CalendarPeriod>
                 <p>
                     {!selectedDate
                         ? 'Выберите срок исполнения '
                         : 'Срок исполнения: '}
-                    <span>{selectedDate || onDateSelect}</span>
+
+                    {onDateSelect && (
+                        <S.CalendarDateSpan>{selectedDate}</S.CalendarDateSpan>
+                    )}
                 </p>
             </S.CalendarPeriod>
         </>

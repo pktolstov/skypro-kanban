@@ -97,7 +97,7 @@ export const FormNewBlock = styled.div`
     display: flex;
     flex-direction: column;
 
-    /* margin-top: 20px; */
+ 
 `
 
 export const FormSubTtl = styled.label`
@@ -226,10 +226,10 @@ export const PopCategoryItem = styled(PopCategoriesThemes)`
         ? '#B4FDD1'
         : '#E9D4FF'
       : $category === 'Web Design'
-        ? '#ffe4c2' // Оранжевый с 10% прозрачностью
+        ? '#ffe4c2' 
         : $category === 'Research'
-        ? '#B4FDD1' // Зеленый с 10% прозрачностью
-        : '#e9d4ff'}; // Фиолетовый с 10% прозрачностью
+        ? '#B4FDD1' 
+        : '#e9d4ff'}; 
     opacity: ${({ $active }) => ($active ? 1 : 0.5)};
   
   color: ${({ $active, $category }) =>
@@ -240,10 +240,10 @@ export const PopCategoryItem = styled(PopCategoriesThemes)`
         ? '#06B16E'
         : '#9a48f1'
       : $category === 'Web Design'
-        ? 'rgba(255, 109, 0, 0.5)' // Полупрозрачный оранжевый
+        ? 'rgba(255, 109, 0, 0.5)' 
         : $category === 'Research'
-        ? '#06b16e' // Полупрозрачный зеленый
-        : 'rgba(154, 72, 241, 0.5)'}; // Полупрозрачный фиолетовый
+        ? '#06b16e' 
+        : 'rgba(154, 72, 241, 0.5)'}; 
   
 
   

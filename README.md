@@ -1,8 +1,34 @@
-# React + Vite
+# Канбан-доска: Управление задачами
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проект представляет собой веб-приложение для управления задачами с использованием методологии Kanban.
 
-Currently, two official plugins are available:
+## Основные функции
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Система аутентификации
+
+-   **Экран входа**:
+
+    -   Поля для ввода почты и пароля
+    -   Валидация данных (подсветка ошибок)
+    -   Переход к регистрации через "Регистрируйтесь здесь"
+
+-   **Экран регистрации**:
+    -   Поля для имени, почты и пароля
+    -   Валидация данных
+    -   Переход ко входу через "Войдите здесь"
+
+### Канбан-доска
+
+-   **Карточки задач**:
+    -   Отображение по статусам выполнения
+    -   Основная информация: категория, название, срок
+    -   Кнопка "..." для детального просмотра
+    -   Возможность редактирования даты, категории, поля с описанием
+
+Технологии
+
+React.js
+Styled Components
+Day.js (работа с датами)
+React Router
+Контекст API для состояния приложения

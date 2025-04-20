@@ -6,8 +6,7 @@ export const CalendarWrapper = styled.div`
 
 export const CalendarBlock = styled.div`
     display: block;
-    padding-bottom:10px;
-
+    padding-bottom: 10px;
 `
 
 export const CalendarMonth = styled.div`
@@ -65,7 +64,7 @@ export const CalendarPeriod = styled.div`
         color: #94a6be;
         line-height: 1;
         span {
-            color: #000
+            color: #000;
         }
     }
 `
@@ -162,23 +161,9 @@ export const NavSvg = styled.svg.attrs({
         fill: #2e3a59;
     }
 `
-
-
-
-// ._other-month {
-//     opacity: 0;
-// }
-
-// ._cell-day:hover {
-//     color: #94a6be;
-//     background-color: #eaeef6;
-// }
-
-// ._active-day {
-//     background-color: #94a6be;
-//     color: #ffffff;
-// }
-
-// ._current {
-//     font-weight: 700;
-// }
+export const CalendarDateSpan = styled.span`
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1;
+    color: #000;
+`

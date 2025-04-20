@@ -20,14 +20,13 @@ export default function PopNewCard() {
     const validateForm = () => {
         const newErrors = {}
 
-        // Проверка названия (удаляем пробелы по краям и проверяем длину)
+   
         if (!title.trim()) {
             newErrors.title = 'Название задачи обязательно'
         } else if (title.trim().length < 3) {
             newErrors.title = 'Название должно содержать минимум 3 символа'
         }
 
-        // Проверка описания (необязательное поле, но если заполнено - проверяем)
         if (!description.trim() && description.trim().length < 3) {
             newErrors.description =
                 'Описание должно содержать минимум 3 символов'
@@ -137,6 +136,8 @@ export default function PopNewCard() {
                                 <Calendar
                                     selectedDate={date}
                                     onDateSelect={setDate}
+                                    isEditable={'true'}
+                                    currentDate={date}
                                 />
                             </S.PopNewCardCalendar>
                         </S.PopNewCardWrap>
@@ -146,43 +147,20 @@ export default function PopNewCard() {
                                 <S.PopCategoriesP>Категория</S.PopCategoriesP>
                             </S.FormSubTtl>
                             <S.PopCategoriesTheme>
-
-                            {['Web Design', 'Research', 'Copywriting'].map((cat) => (
-    <S.PopCategoryItem
-      key={cat}
-      $active={topic === cat}
-      $category={cat}
-      onClick={() => handleCategoryClick(cat)}
-    >
-      <p>{cat}</p>
-    </S.PopCategoryItem>
-  ))}
-
-
-                                {/* {['Web Design', 'Research', 'Copywriting'].map(
+                                {['Web Design', 'Research', 'Copywriting'].map(
                                     (cat) => (
-
-                                        <div
+                                        <S.PopCategoryItem
                                             key={cat}
-                                            className={`categories__theme ${
-                                                topic === cat
-                                                    ? '_active-category'
-                                                    : ''
-                                            } ${
-                                                cat === 'Web Design'
-                                                    ? '_orange'
-                                                    : cat === 'Research'
-                                                    ? '_green'
-                                                    : '_purple'
-                                            }`}
+                                            $active={topic === cat}
+                                            $category={cat}
                                             onClick={() =>
                                                 handleCategoryClick(cat)
                                             }
                                         >
                                             <p>{cat}</p>
-                                        </div>
+                                        </S.PopCategoryItem>
                                     )
-                                )} */}
+                                )}
                             </S.PopCategoriesTheme>
                         </S.PopNewCardCategories>
 

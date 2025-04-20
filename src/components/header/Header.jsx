@@ -6,7 +6,7 @@ import { getToken } from '../../services/auth'
 import { ThemeContext } from '../../context/ThemeContext'
 import { useTheme } from '../../context/ThemeProvider'
 import { lightTheme, darkTheme } from '../../themes'
-import { AuthContext } from '../../context/AuthContext'
+
 
 export default function Header() {
     const [user, setUser] = useState(getToken())
@@ -53,35 +53,36 @@ export default function Header() {
                             Создать новую задачу
                         </S.HeaderButton>
                         <S.HeaderUser onClick={getVisibility}>
-                            <Link>
-                                {user ? getToken().name : ''}
-                            </Link>
+                            <Link>{user ? getToken().name : ''}</Link>
                         </S.HeaderUser>
                         {isVisible && (
                             <S.HeaderUserPop>
                                 <S.HeaderUserPopName>
-                                {getToken().name ? getToken().name : ''}
+                                    {getToken().name ? getToken().name : ''}
                                 </S.HeaderUserPopName>
-<S.HeaderUserPopMail>{getToken().login ? getToken().login : ''}</S.HeaderUserPopMail>
- 
-<S.HeaderUserPopTheme>
-<p>Темная тема</p>
+                                <S.HeaderUserPopMail>
+                                    {getToken().login ? getToken().login : ''}
+                                </S.HeaderUserPopMail>
+
+                                <S.HeaderUserPopTheme>
+                                    <p>Темная тема</p>
                                     <input
                                         type="checkbox"
                                         className="checkbox"
                                         name="checkbox"
                                         checked={theme === darkTheme}
                                         onChange={toggleTheme}
-                                    /> 
-</S.HeaderUserPopTheme>
+                                    />
+                                </S.HeaderUserPopTheme>
 
-<S.PopButtonLight  onClick={() => navigate('/exit')} type="button">
-Выйти
-</S.PopButtonLight>
-
+                                <S.PopButtonLight
+                                    onClick={() => navigate('/exit')}
+                                    type="button"
+                                >
+                                    Выйти
+                                </S.PopButtonLight>
                             </S.HeaderUserPop>
                         )}
- 
                     </S.HeaderNav>
                 </S.HeaderBlock>
             </S.HeaderContainer>

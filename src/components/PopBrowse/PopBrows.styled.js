@@ -110,20 +110,6 @@ export const FormBrowserArea = styled.textarea`
     margin-top: 14px;
     height: 200px;
 
-    /* .form-browse__area::-moz-placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1px;
-    color: #94a6be;
-    letter-spacing: -0.14px;
-}
-.form-browse__area::placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1px;
-    color: #94a6be;
-    letter-spacing: -0.14px;
-} */
 `
 
 export const FormErrorBlock = styled.div`
