@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import * as S from './SignIn.styled'
+import { Link } from 'react-router-dom'
 
 function SignIn({ setIsAuth }) {
     const navigate = useNavigate()
@@ -13,14 +14,13 @@ function SignIn({ setIsAuth }) {
                 <S.Title>Вход</S.Title>
                 <form>
                     <S.Input type="email" placeholder="Эл. почта" />
-                    <S.Input type="password" placeholder="Пароль" />
+                    <S.Input type="password" placeholder="Пароль" autoComplete="current-password"/>
                     <S.Button onClick={handleLogin} type="button">
                         Войти
                     </S.Button>
                 </form>
                 <S.Text>
-                    Нужно зарегистрироваться?{' '}
-                    <S.Link href="/signUp">Регистрируйтесь здесь</S.Link>
+                    <Link to="/signUp">Регистрируйтесь здесь</Link>
                 </S.Text>
             </S.Card>
         </S.Container>

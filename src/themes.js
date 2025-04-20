@@ -1,5 +1,6 @@
 export const lightTheme = {
     bodyBg: '#ffffff',
+    headerBg: '#ffffff',
     textColor: '#000000',
     linkColor: '#000000',
     buttonBg: '#f0f0f0',

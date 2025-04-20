@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom'
 import * as S from './Header.styled'
+import { useNavigate } from 'react-router-dom'
 import { useState, useContext } from 'react'
 import { getToken } from '../../services/auth'
 import { ThemeContext } from '../../context/ThemeContext'
 import { useTheme } from '../../context/ThemeProvider'
-import { lightTheme,darkTheme } from '../../themes'
+import { lightTheme, darkTheme } from '../../themes'
+import { AuthContext } from '../../context/AuthContext'
 
 export default function Header() {
+    const [user, setUser] = useState(getToken())
+    const navigate = useNavigate()
     const context = useContext(ThemeContext)
     const [isVisible, setIsVisible] = useState(false)
     const { theme, toggleTheme } = useTheme() // Получаем текущую тему и функцию переключения
@@ -15,7 +19,6 @@ export default function Header() {
         setIsVisible(!isVisible)
     }
 
-
     if (!context) {
         throw new Error('Header must be wrapped in ThemeProvider')
     }
@@ -23,70 +26,65 @@ export default function Header() {
     return (
         <S.SHeader>
             <S.HeaderContainer>
-                <div className="header__block">
-                    {/* Логотипы с условием отображения в зависимости от темы */}
-                    <div
-                        className={`header__logo ${
-                            theme === lightTheme ? '_show' : '_hide'
-                        }`}
-                    >
-                        <a href="" target="_self">
-                            <img src="images/logo.png" alt="logo" />
-                        </a>
-                    </div>
-                    <div
-                        className={`header__logo ${
-                            theme === darkTheme ? '_show' : '_hide'
-                        }`}
-                    >
-                        <a href="" target="_self">
-                            <img src="images/logo_dark.png" alt="logo" />
-                        </a>
-                    </div>
-
-                    <nav className="header__nav">
-                        <button className="header__btn-main-new _hover01">
-                            <Link to="/newcard">Создать новую задачу</Link>
-                        </button>
-
-                        <a
-                            onClick={getVisibility}
-                            href="#user-set-target"
-                            className="header__user _hover02"
-                        >
-                            {getToken().name}
-                        </a>
-
-                        <div
-                            style={{ display: isVisible ? 'block' : 'none' }}
-                            className="header__pop-user-set pop-user-set"
-                        >
-                            <p className="pop-user-set__name">
-                                {getToken().name}
-                            </p>
-                            <p className="pop-user-set__mail">
-                                {getToken().login}
-                            </p>
-
-                            <div className="pop-user-set__theme">
-                                <p>Темная тема</p>
-                                <input
-                                    type="checkbox"
-                                    className="checkbox"
-                                    name="checkbox"
-                                    checked={theme === darkTheme}
-                                    onChange={toggleTheme}
+                <S.HeaderBlock>
+                    {theme === lightTheme && (
+                        <S.HeaderLogo>
+                            <Link to="/" target="_self">
+                                <S.HeaderLogoImg
+                                    src="images/logo.png"
+                                    alt="logo"
                                 />
-                            </div>
+                            </Link>
+                        </S.HeaderLogo>
+                    )}
 
-                            <button type="button" className="_hover03">
-                                <Link to="/exit">Выйти</Link>
-                            </button>
-                        </div>
-                    </nav>
-                </div>
+                    {theme === darkTheme && (
+                        <S.HeaderLogo>
+                            <Link to="/" target="_self">
+                                <S.HeaderLogoImg
+                                    src="images/logo_dark.png"
+                                    alt="logo"
+                                />
+                            </Link>
+                        </S.HeaderLogo>
+                    )}
+                    <S.HeaderNav>
+                        <S.HeaderButton onClick={() => navigate('/newcard')}>
+                            Создать новую задачу
+                        </S.HeaderButton>
+                        <S.HeaderUser onClick={getVisibility}>
+                            <Link>
+                                {user ? getToken().name : ''}
+                            </Link>
+                        </S.HeaderUser>
+                        {isVisible && (
+                            <S.HeaderUserPop>
+                                <S.HeaderUserPopName>
+                                {getToken().name ? getToken().name : ''}
+                                </S.HeaderUserPopName>
+<S.HeaderUserPopMail>{getToken().login ? getToken().login : ''}</S.HeaderUserPopMail>
+ 
+<S.HeaderUserPopTheme>
+<p>Темная тема</p>
+                                    <input
+                                        type="checkbox"
+                                        className="checkbox"
+                                        name="checkbox"
+                                        checked={theme === darkTheme}
+                                        onChange={toggleTheme}
+                                    /> 
+</S.HeaderUserPopTheme>
+
+<S.PopButtonLight  onClick={() => navigate('/exit')} type="button">
+Выйти
+</S.PopButtonLight>
+
+                            </S.HeaderUserPop>
+                        )}
+ 
+                    </S.HeaderNav>
+                </S.HeaderBlock>
             </S.HeaderContainer>
         </S.SHeader>
     )
 }
-

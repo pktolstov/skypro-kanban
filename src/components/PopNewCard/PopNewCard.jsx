@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import Calendar from '../Calendar/Calendar'
-import { Link } from 'react-router-dom'
+
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { CardsContext } from '../../context/CardsContext'
 import dayjs from 'dayjs'
+import * as S from './PopNewCard.styled'
 
 export default function PopNewCard() {
     const navigate = useNavigate()
@@ -62,34 +63,24 @@ export default function PopNewCard() {
     }
 
     return (
-        <div className="pop-new-card" id="popNewCard">
-            <div className="pop-new-card__container">
-                <div className="pop-new-card__block">
-                    <div className="pop-new-card__content">
-                        <h3 className="pop-new-card__ttl">Создание задачи</h3>
-                        <Link to="/" className="pop-new-card__close">
-                            &#10006;
-                        </Link>
-                        {/* <a href="#" className="pop-new-card__close">
-                            &#10006;
-                        </a> */}
-                        <div className="pop-new-card__wrap">
-                            <form
-                                className="pop-new-card__form form-new"
+        <S.PopNewCard id="popNewCard">
+            <S.PopNewCardContainer>
+                <S.PopNewCardBlock>
+                    <S.PopNewCardContent>
+                        <S.PopNewCardTtl>Создание задачи</S.PopNewCardTtl>
+                        <S.PopNewCardLink to="/">&#10006;</S.PopNewCardLink>
+                        <S.PopNewCardWrap>
+                            <S.PopNewCardForm
                                 id="formNewCard"
                                 onSubmit={handleCreate}
                             >
-                                <div className="form-new__block">
-                                    <label
-                                        htmlFor="formTitle"
-                                        className="subttl"
-                                    >
+                                <S.FormNewBlock>
+                                    <S.FormSubTtl htmlFor="formTitle">
                                         Название задачи
-                                    </label>
-                                    <input
-                                        className={`form-new__input ${
-                                            errors.title ? '_error' : ''
-                                        }`}
+                                    </S.FormSubTtl>
+
+                                    <S.FormNewInput
+                                        $error={errors.title}
                                         type="text"
                                         name="name"
                                         id="formTitle"
@@ -100,23 +91,20 @@ export default function PopNewCard() {
                                             setTitle(e.target.value)
                                         }
                                     />
+
                                     {errors.title && (
-                                        <div className="form-error">
+                                        <S.FormErrorBlock>
                                             {errors.title}
-                                        </div>
+                                        </S.FormErrorBlock>
                                     )}
-                                </div>
-                                <div className="form-new__block">
-                                    <label
-                                        htmlFor="textArea"
-                                        className="subttl"
-                                    >
+                                </S.FormNewBlock>
+                                <S.FormNewBlock style={{ marginTop: '20px' }}>
+                                    <S.FormSubTtl htmlFor="textArea">
                                         Описание задачи
-                                    </label>
-                                    <textarea
-                                        className={`form-new__area ${
-                                            errors.description ? '_error' : ''
-                                        }`}
+                                    </S.FormSubTtl>
+
+                                    <S.FormNewArea
+                                        $error={errors.title}
                                         name="text"
                                         id="textArea"
                                         placeholder="Введите описание задачи..."
@@ -124,33 +112,56 @@ export default function PopNewCard() {
                                         onChange={(e) =>
                                             setDescription(e.target.value)
                                         }
-                                    ></textarea>
+                                    />
                                     {errors.description && (
-                                        <div className="form-error">
+                                        <S.FormErrorBlock>
                                             {errors.description}
-                                        </div>
+                                        </S.FormErrorBlock>
                                     )}
+
                                     {error && (
-                                        <div className="form-error">
+                                        <S.FormErrorBlock>
                                             {error}
-                                        </div>
+                                        </S.FormErrorBlock>
                                     )}
-                                </div>
-                            </form>
-                            <div className="pop-new-card__calendar calendar">
-                                <p className="calendar__ttl subttl">Даты</p>
+                                </S.FormNewBlock>
+                            </S.PopNewCardForm>
+                            <S.PopNewCardCalendar>
+                                <S.FormSubTtl>
+                                    <S.NewCardCalendarTtl>
+                                        {' '}
+                                        Даты
+                                    </S.NewCardCalendarTtl>
+                                </S.FormSubTtl>
+
                                 <Calendar
                                     selectedDate={date}
                                     onDateSelect={setDate}
                                 />
-                            </div>
-                        </div>
+                            </S.PopNewCardCalendar>
+                        </S.PopNewCardWrap>
 
-                        <div className="pop-new-card__categories categories">
-                            <p className="categories__p subttl">Категория</p>
-                            <div className="categories__themes">
-                                {['Web Design', 'Research', 'Copywriting'].map(
+                        <S.PopNewCardCategories>
+                            <S.FormSubTtl style={{ marginBottom: '14px' }}>
+                                <S.PopCategoriesP>Категория</S.PopCategoriesP>
+                            </S.FormSubTtl>
+                            <S.PopCategoriesTheme>
+
+                            {['Web Design', 'Research', 'Copywriting'].map((cat) => (
+    <S.PopCategoryItem
+      key={cat}
+      $active={topic === cat}
+      $category={cat}
+      onClick={() => handleCategoryClick(cat)}
+    >
+      <p>{cat}</p>
+    </S.PopCategoryItem>
+  ))}
+
+
+                                {/* {['Web Design', 'Research', 'Copywriting'].map(
                                     (cat) => (
+
                                         <div
                                             key={cat}
                                             className={`categories__theme ${
@@ -171,20 +182,20 @@ export default function PopNewCard() {
                                             <p>{cat}</p>
                                         </div>
                                     )
-                                )}
-                            </div>
-                        </div>
-                        <button
+                                )} */}
+                            </S.PopCategoriesTheme>
+                        </S.PopNewCardCategories>
+
+                        <S.PopNewCardButton
                             type="button"
-                            className="form-new__create _hover01"
                             id="btnCreate"
                             onClick={handleCreate}
                         >
                             Создать задачу
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </S.PopNewCardButton>
+                    </S.PopNewCardContent>
+                </S.PopNewCardBlock>
+            </S.PopNewCardContainer>
+        </S.PopNewCard>
     )
 }

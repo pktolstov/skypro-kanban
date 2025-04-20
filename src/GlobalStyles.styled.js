@@ -62,3 +62,4 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme?.grayText || '#ffffff'};
   }
 `
+

@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
 import Main from '../components/Main/Main'
-import Loader from '../components/Adition/Adition'
+import { Loader } from '../components/Adition/Adition'
 import { getToken } from '../services/auth'
 import { fetchCards } from '../services/api'
 import { GlobalStyles } from '../GlobalStyles.styled'
 import Header from '../components/Header/Header'
 import { CardsProvider } from '../context/CardsProvider'
 import { EmptyCardsPage } from '../components/Adition/Adition'
-
+import { Wrapper } from '../components/Main/Main.styled'
 
 function MainPage() {
     const [loading, setLoading] = useState(true)
@@ -16,7 +16,6 @@ function MainPage() {
     const [error, setError] = useState('')
 
     const getCards = useCallback(async () => {
-
         try {
             setLoading(true)
             const data = await fetchCards({
@@ -33,24 +32,22 @@ function MainPage() {
         getCards()
     }, [getCards])
     return (
-        
         <CardsProvider>
             <GlobalStyles />
-            <div className="wrapper">
+            <Wrapper>
                 <Header />
                 {loading ? (
-                    <Loader /> 
+                    <Loader />
                 ) : error ? (
-                    <span>{error}</span> 
+                    <span>{error}</span>
                 ) : cards.length === 0 ? (
-                    <EmptyCardsPage /> 
+                    <EmptyCardsPage />
                 ) : (
-                    <Main /> 
+                    <Main />
                 )}
                 <Outlet />
-            </div>
+            </Wrapper>
         </CardsProvider>
-    
     )
 }
 
