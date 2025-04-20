@@ -4,10 +4,10 @@ import { BaseInput, BaseButton } from '../BaseInput/BaseInput'
 import { useNavigate } from 'react-router-dom'
 import { signIn, signUp } from '../../services/auth'
 import { AuthContext } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
 
-
-const AuthForm = ({ isSignUp}) => {
-    const {updateUserInfo} = useContext(AuthContext)
+const AuthForm = ({ isSignUp }) => {
+    const { updateUserInfo } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
@@ -15,13 +15,13 @@ const AuthForm = ({ isSignUp}) => {
         login: '',
         password: '',
     })
-   
+
     const [errors, setErrors] = useState({
         name: '',
         login: '',
         password: '',
     })
-   
+
     const [error, setError] = useState('')
 
     const validateForm = () => {
@@ -44,7 +44,9 @@ const AuthForm = ({ isSignUp}) => {
         }
         if (!formData.password.trim()) {
             newErrors.password = true
-            setError('Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.')
+            setError(
+                'Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.'
+            )
             isValid = false
         }
         setErrors(newErrors)
@@ -64,11 +66,9 @@ const AuthForm = ({ isSignUp}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!validateForm()) {
-           
             return
         }
         try {
-            
             const data = !isSignUp
                 ? await signIn({
                       login: formData.login,
@@ -78,7 +78,6 @@ const AuthForm = ({ isSignUp}) => {
             if (data) {
                 updateUserInfo(data)
 
-
                 navigate('/')
             }
         } catch (err) {
@@ -86,8 +85,6 @@ const AuthForm = ({ isSignUp}) => {
         }
     }
     return (
-    
-
         <S.Container>
             <S.Card>
                 <S.Title>{isSignUp ? 'Регистрация' : 'Вход'}</S.Title>
@@ -102,6 +99,7 @@ const AuthForm = ({ isSignUp}) => {
                                 placeholder="Имя"
                                 value={formData.name}
                                 onChange={handleChange}
+                                autoComplete="username"
                             />
                         )}
 
@@ -113,6 +111,7 @@ const AuthForm = ({ isSignUp}) => {
                             placeholder="Эл. почта"
                             value={formData.login}
                             onChange={handleChange}
+                            autoComplete="username"
                         />
 
                         <BaseInput
@@ -124,6 +123,10 @@ const AuthForm = ({ isSignUp}) => {
                             placeholder="Пароль"
                             value={formData.password}
                             onChange={handleChange}
+                            autoСomplete="current-password"
+                            // {
+                            //     !isSignUp ? "current-password" : "new-password"
+                            // }
                         />
                     </S.InputForm>
 
@@ -132,23 +135,22 @@ const AuthForm = ({ isSignUp}) => {
                 <BaseButton
                     type="button"
                     onSubmit={handleSubmit}
-
                     text={isSignUp ? 'Зарегистрироваться' : 'Войти'}
                 />
                 {!isSignUp && (
                     <S.Text>
                         Нужно зарегистрироваться?{' '}
-                        <S.Link href="/signUp">Регистрируйтесь здесь</S.Link>
+                        <Link to="/signUp">
+                            <S.LinkText>Регистрируйтесь здесь</S.LinkText>
+                        </Link>
                     </S.Text>
                 )}
                 {isSignUp && (
                     <S.Text>
                         Уже есть аккаунт?{' '}
-                        <span>
-                            <S.Link style={{ fontSize: '14px' }} href="/signIn">
-                                Войдите здесь
-                            </S.Link>
-                        </span>{' '}
+                        <Link to="/signIn">
+                            <S.LinkText>Войдите здесь</S.LinkText>
+                        </Link>
                     </S.Text>
                 )}
             </S.Card>

@@ -77,7 +77,7 @@ export const Text = styled.p`
     text-align: center;
     font-size: 14px;
     color: #6b7280;
-    /* margin-top: 12px; */
+
 `
 
 export const ErrorText = styled.p`
@@ -89,8 +89,7 @@ export const ErrorText = styled.p`
     margin-top: 7px;
 `
 
-export const Link = styled.a`
-    /* color: #565EEF; */
+export const LinkText = styled.span`
     color: #6b7280;
     text-decoration: underline;
     &:hover {

@@ -1,13 +1,14 @@
 import { Card } from '../Card/Card'
-import { SColumn } from './Column.styled'
+import * as S from './Column.styled'
 export default function Column({ title, cards }) {
     return (
-        <SColumn className="main__column">
-            <div className="column__title">
-                <p>{title === 'in-progress' ? (title = ' В работе') : title}</p>
-            </div>
-            <div className="cards">
-                {cards.map((card) => {
+        <S.SColumn >
+<S.ColumnTile>
+<p>{title === 'in-progress' ? (title = ' В работе') : title}</p>
+</S.ColumnTile>
+
+            <S.ColumnCards>
+            {cards.map((card) => {
                     return (
                         <Card
                             key={card._id}
@@ -18,7 +19,8 @@ export default function Column({ title, cards }) {
                         />
                     )
                 })}
-            </div>
-        </SColumn>
+
+            </S.ColumnCards>
+        </S.SColumn>
     )
 }

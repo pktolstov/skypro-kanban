@@ -1,64 +1,53 @@
 import { ClipLoader } from 'react-spinners'
-import { Link } from 'react-router-dom'
-const Loader = () => {
+import { Link, useNavigate } from 'react-router-dom'
+import * as S from './Adition.styled'
+
+export const Loader = () => {
     return (
-        <div
-            className="loader"
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh',
-            }}
+        <S.EmptyCardPop
+        style={{justifySelf:'center'}}
         >
-            <div className="pop-exit__ttl">
-                <h2>Идет загрузка...</h2>
-            </div>
-            <ClipLoader color="#3936d7" size={100} /> 
-        </div>
+         
+
+            <S.PopExitTtl>Идет загрузка...</S.PopExitTtl>
+            <ClipLoader color="#3936d7" size={100} />
+           
+
+        </S.EmptyCardPop>
     )
 }
 
 export function LoadExpect() {
-    return (
-        <div className="pop-exit__ttl">
-            <h2>Идет загрузка...</h2>
-        </div>
-    )
+    return <S.PopExitTtl>Идет загрузка...</S.PopExitTtl>
 }
+
 
 export function EmptyCardsPage() {
     const handleClose = () => {
         const popup = document.getElementById('popExit')
         if (popup) popup.style.display = 'none'
     }
+    const navigate = useNavigate()
 
     return (
-        <div className="pop-exit" id="popExit">
-            <div className="pop-exit__container">
-                <div className="pop-exit__block">
-                    <div className="pop-exit__ttl">
-                        <h2>У Вас еще нет созданных задач</h2>
-                    </div>
-                    <div className="pop-exit__form-group">
-                        <Link
-                            to="/newcard"
-                            className="pop-exit__exit-yes _hover01"
+        <S.PopExit id="popExit">
+            <S.PopContainer>
+                <S.PopExitBlock>
+                    <S.PopExitTtl>У Вас еще нет созданных задач</S.PopExitTtl>
+
+                    <S.PopExitFormGroup>
+                        <S.PopExitButton
+                            onClick={() => navigate('/newcard')}
+                            id="exitYes"
                         >
                             Создать
-                        </Link>
-
-                        <button
-                            onClick={handleClose}
-                            className="pop-exit__exit-yes _hover03"
-                        >
-                            Отмена
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </S.PopExitButton>
+                        <S.PopExitNo id="exitNo" onClick={handleClose}>
+                           <a>Нет, остаться</a> 
+                        </S.PopExitNo>
+                    </S.PopExitFormGroup>
+                </S.PopExitBlock>
+            </S.PopContainer>
+        </S.PopExit>
     )
 }
-
-export default Loader

@@ -6,7 +6,6 @@ function SignInPage({setIsAuth}) {
         <>
             <GlobalStyles />
             <AuthForm setIsAuth={setIsAuth}  isSignUp={false}/>
-            {/* <SignIn setIsAuth={setIsAuth}/> */}
         </>
     )
 }
