@@ -4,26 +4,26 @@ import { BaseInput, BaseButton } from '../BaseInput/BaseInput'
 import { useNavigate } from 'react-router-dom'
 import { signIn, signUp } from '../../services/auth'
 import { AuthContext } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
 
-
-const AuthForm = ({ isSignUp, setIsAuth }) => {
-    const {updateUserInfo} = useContext(AuthContext)
+const AuthForm = ({ isSignUp }) => {
+    const { updateUserInfo } = useContext(AuthContext)
     const navigate = useNavigate()
-    // состояние полей
+
     const [formData, setFormData] = useState({
         name: '',
         login: '',
         password: '',
     })
-    // состояние ошибок
+
     const [errors, setErrors] = useState({
         name: '',
         login: '',
         password: '',
     })
-    // состояние текста ошибки, чтобы показать её пользователю
+
     const [error, setError] = useState('')
-    // функция валидации
+
     const validateForm = () => {
         const newErrors = {
             name: '',
@@ -44,13 +44,15 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
         }
         if (!formData.password.trim()) {
             newErrors.password = true
-            setError('Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.')
+            setError(
+                'Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.'
+            )
             isValid = false
         }
         setErrors(newErrors)
         return isValid
     }
-    // функция, которая отслеживает в полях изменения и меняет состояние компонента
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({
@@ -60,15 +62,13 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
         setErrors({ ...errors, [name]: false })
         setError('')
     }
-    // функция отправки формы
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!validateForm()) {
-            // если у нас форма не прошла валидацию, то дальше не продолжаем
             return
         }
         try {
-            // чтобы не писать две разных функции, выберем нужный запрос через тернарный оператор
             const data = !isSignUp
                 ? await signIn({
                       login: formData.login,
@@ -77,8 +77,6 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                 : await signUp(formData)
             if (data) {
                 updateUserInfo(data)
-                // setIsAuth(true)
-                // localStorage.setItem('userInfo', JSON.stringify(data))
 
                 navigate('/')
             }
@@ -87,8 +85,6 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
         }
     }
     return (
-        // <SignIn />
-
         <S.Container>
             <S.Card>
                 <S.Title>{isSignUp ? 'Регистрация' : 'Вход'}</S.Title>
@@ -103,6 +99,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                                 placeholder="Имя"
                                 value={formData.name}
                                 onChange={handleChange}
+                                autoComplete="username"
                             />
                         )}
 
@@ -114,6 +111,7 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                             placeholder="Эл. почта"
                             value={formData.login}
                             onChange={handleChange}
+                            autoComplete="username"
                         />
 
                         <BaseInput
@@ -125,6 +123,10 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                             placeholder="Пароль"
                             value={formData.password}
                             onChange={handleChange}
+                            autoСomplete="current-password"
+                            // {
+                            //     !isSignUp ? "current-password" : "new-password"
+                            // }
                         />
                     </S.InputForm>
 
@@ -133,24 +135,22 @@ const AuthForm = ({ isSignUp, setIsAuth }) => {
                 <BaseButton
                     type="button"
                     onSubmit={handleSubmit}
-                    // type="secondary"
-                    // fullWidth={true}
                     text={isSignUp ? 'Зарегистрироваться' : 'Войти'}
                 />
                 {!isSignUp && (
                     <S.Text>
                         Нужно зарегистрироваться?{' '}
-                        <S.Link href="/signUp">Регистрируйтесь здесь</S.Link>
+                        <Link to="/signUp">
+                            <S.LinkText>Регистрируйтесь здесь</S.LinkText>
+                        </Link>
                     </S.Text>
                 )}
                 {isSignUp && (
                     <S.Text>
                         Уже есть аккаунт?{' '}
-                        <span>
-                            <S.Link style={{ fontSize: '14px' }} href="/signIn">
-                                Войдите здесь
-                            </S.Link>
-                        </span>{' '}
+                        <Link to="/signIn">
+                            <S.LinkText>Войдите здесь</S.LinkText>
+                        </Link>
                     </S.Text>
                 )}
             </S.Card>

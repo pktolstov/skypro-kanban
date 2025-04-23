@@ -8,9 +8,10 @@ import PrivateRoute from './PrivateRoute'
 import ExitPage from './pages/ExitPage'
 import CardPage from './pages/CardPage'
 
-import { Route, Routes, data } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { getToken } from './services/auth'
+import NewCardPage from './pages/newCardPage'
 
 function AppRoutes() {
     const [isAuth, setIsAuth] = useState(!!getToken())
@@ -24,6 +25,7 @@ function AppRoutes() {
                         element={<ExitPage setIsAuth={setIsAuth} />}
                     />
                     <Route path="/card/:id" element={<CardPage />} />
+                    <Route path="/newcard" element={<NewCardPage />} />
                 </Route>
             </Route>
             <Route

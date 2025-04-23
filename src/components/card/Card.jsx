@@ -1,4 +1,4 @@
-import { CardTheme, SCard } from './Card.styled'
+import * as S from './Card.styled'
 import { colors } from '../../Constants/theme'
 import { Link } from 'react-router-dom'
 let color = (cardTheme) => {
@@ -11,36 +11,35 @@ let color = (cardTheme) => {
     }
 }
 
-export function Card({ theme, date, title,id }) {
-    let dateComment = new Date("2025-04-05T15:34:32.434Z")
-  .toLocaleDateString('ru-RU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit',
-  });
+export function Card({ theme, date, title, id }) {
+    let dateComment = new Date(date).toLocaleDateString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+    })
     return (
-        <SCard>
-            <div className="cards__item">
-                <div className="cards__card card">
-                    <div className="card__group">
-                        <CardTheme 
-                        $theme={colors[theme]}>
+        <S.SCard>
+            <S.CardsItem>
+                <S.CardsCard>
+                    <S.CardsGroup>
+                        <S.CardTheme $theme={colors[theme]}>
                             <p className={color(theme)}>{theme}</p>
-                        </CardTheme>
+                        </S.CardTheme>
 
-                        <Link to={`/card/${id}` } target="_self">
-                            <div className="card__btn">
+                        <Link to={`/card/${id}`} target="_self">
+                            <S.CardBtn>
                                 <div></div>
                                 <div></div>
                                 <div></div>
-                            </div>
+                            </S.CardBtn>
                         </Link>
-                    </div>
-                    <div className="card__content">
+                    </S.CardsGroup>
+                    <S.CardContent>
                         <a href="" target="_blank">
-                            <h3 className="card__title">{title}</h3>
+                            <S.CardsTitle>{title}</S.CardsTitle>
+                           
                         </a>
-                        <div className="card__date">
+                        <S.CardDate>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="13"
@@ -74,10 +73,10 @@ export function Card({ theme, date, title,id }) {
                                 </defs>
                             </svg>
                             <p>{dateComment}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </SCard>
+                        </S.CardDate>
+                    </S.CardContent>
+                </S.CardsCard>
+            </S.CardsItem>
+        </S.SCard>
     )
 }
